@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerRoller2D : MonoBehaviour {
 
-
-
+	public float speed = 10;
 	Rigidbody rb;
 	
 	void Start () {
@@ -13,9 +12,10 @@ public class PlayerRoller2D : MonoBehaviour {
 	}
 	
 	void Update () {
-		rb.AddForce(Input.gyro.gravity, ForceMode.Acceleration);
+		Debug.Log(Input.acceleration);
+		rb.AddForce(Input.acceleration*speed,ForceMode.Acceleration);
 		if(Input.touchCount==1) {
-			Instantiate(gameObject, Camera.main.ScreenToWorldPoint(Input.touches[0].position), Quaternion.identity);
+			rb.AddForce(Vector3.up, ForceMode.Impulse);
 		}
 	}
 }
