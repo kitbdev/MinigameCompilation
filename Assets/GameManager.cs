@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	public void FinishGame(int score=0) {
-		ToggleEndGameScreen(true);
+		//ToggleEndGameScreen(true);
 		// do something with score
 
 	}

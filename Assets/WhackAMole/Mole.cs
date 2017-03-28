@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Mole : MonoBehaviour {
 
@@ -12,46 +13,47 @@ public class Mole : MonoBehaviour {
 	}
 
 	public MoleState moleState;
-	public Animator anim;
+	private Animator anim;
 	public WhackAMole moleManager;
 	private float curTimer = 0;
-	public float hitLength = 2;
-	public float upLength = 3;
-	public float downLength = 4;
+	public float hitDur = 2;
+	public float upDur = 3;
+	public float downDur = 4;
 
 	void Start() {
 		anim = GetComponent<Animator>();
+		moleState = (MoleState)Random.Range(0,2);
+		// modify lengths over time
 	}
 	void Update () {
 		if (curTimer<=0) {
 			// move to next state
 			if (moleState==MoleState.up) {
 				moleState = MoleState.down;
-				curTimer = downLength;
+				curTimer = downDur;
 			} else if (moleState==MoleState.down) {
 				moleState = MoleState.up;
-				curTimer = upLength;
+				curTimer = upDur;
 			} else if (moleState==MoleState.hit) {
 				moleState = MoleState.down;
-				curTimer = downLength;
+				curTimer = downDur;
 			}
 			anim.SetInteger("MoleState", (int)moleState);
 		} else {
 			curTimer-=Time.deltaTime;
 		}
 	}
-	// returns if the mole was up
-	public bool TappedOn() {
+	public void TappedOn() {
+		Debug.Log(name+"Tapped on");
 		if (moleState==MoleState.up) {
 			moleState = MoleState.hit;
-			curTimer = hitLength;
+			curTimer = hitDur;
 			anim.SetInteger("MoleState", (int)moleState);
-			return true;
+			moleManager.MoleHit();
 		} else if (moleState==MoleState.down) {
 			// nothing, maybe mocking sfx
 		} else if (moleState==MoleState.hit) {
 			// nothing
 		}
-		return false;
 	}
 }
