@@ -55,5 +55,10 @@ public class Mole : MonoBehaviour {
 		} else if (moleState==MoleState.hit) {
 			// nothing
 		}
+		
+	}
+	void OnMouseDown()
+	{
+		TappedOn();
 	}
 }
