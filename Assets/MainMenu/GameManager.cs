@@ -14,16 +14,21 @@ public class GameManager : MonoBehaviour {
 		ToggleEndGameScreen(false);
 	}
 	
-	void Update () {
-		// if game is exited, save pogress?
+	public void StartGame(int index) {
+		if (index < SceneManager.sceneCountInBuildSettings)
+		{
+			Debug.LogWarning("Not enough scenes in build settings!");
+			return;
+		}
+		curGameIndex = index;
+		SceneManager.LoadScene(index);
 	}
-	
 	public void FinishGame(int score=0) {
-		//ToggleEndGameScreen(true);
+		ToggleEndGameScreen(true);
 		// do something with score
-
+		
 	}
-	public void ReturnToMenuB() {
+	public void ReturnToMenu() {
 		ToggleEndGameScreen(false);
 		curGameIndex = 0;
 		SceneManager.LoadScene(0);
