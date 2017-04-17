@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class LeaderboardManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+
+	void Start() {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	/// logs out from the leaderboard service
+	public void LogIn() {
+
+	}
+	/// logs in to the leaderboard service
+	public void LogOut() {
+
+	}
+	/// Shows the leaderboard screen
+	public void ShowLeaderBoard() {
+
+	}
+	/// Submits the user score to the leaderboard
+	public void AddScore() {
+
 	}
 }

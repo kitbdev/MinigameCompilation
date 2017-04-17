@@ -59,6 +59,6 @@ public class WhackAMole : MonoBehaviour
     {
 		Debug.Log("Gameover");
 		gameTimer = gameLength;
-		// GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FinishGame(curScore);
+		GameObject.FindGameObjectWithTag("MinigameManager").GetComponent<MinigameManager>().FinishMinigame(curScore);
     }
 }
