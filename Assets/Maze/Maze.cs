@@ -8,6 +8,7 @@ public class Maze : MonoBehaviour
 
     public GameObject repGO;
 	public Text timeText;
+    LineRenderer lr;
 
 	float timeTaken = 0;
     bool started = false;
@@ -15,7 +16,7 @@ public class Maze : MonoBehaviour
 
     void Start()
     {
-
+        lr = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -25,7 +26,7 @@ public class Maze : MonoBehaviour
        	Vector3 repPos = ray.GetPoint(8);
 		//repPos.y = 5;
 		repGO.transform.position = repPos;
-		//Debug.Log("mpos "+Input.mousePosition+", "+ray);
+		// Debug.Log("mpos "+Input.mousePosition+", "+ray);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 40))
         {
@@ -36,12 +37,20 @@ public class Maze : MonoBehaviour
                 {
                     Debug.Log("Started");
                     started = true;
+                    timeTaken=0;
+                    timeText.text = "Time taken:"+"0s";
+                    lr.positionCount = 0;
                 }
             } 
 			else if (!finished)
 			{
 				timeTaken+=Time.deltaTime;
-
+                timeText.text = "Time taken:"+(int)(timeTaken*100)/100f+"s";
+                if (((int)(timeTaken*1000)/10f) % 0.5f == 0)
+                {
+                    lr.positionCount++;
+                    lr.SetPosition(lr.positionCount-1, repPos);
+                }
                 if (col.CompareTag("Damage") )//|| Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
                     Debug.Log("failed");
@@ -52,6 +61,8 @@ public class Maze : MonoBehaviour
 					Debug.Log("finished");
 					finished = true;
                     started = false;
+                    int curScore = (int)(1f / timeTaken * 100);
+                    GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FinishGame(curScore);
 				}
 			}
         } else {

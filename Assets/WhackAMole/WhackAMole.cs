@@ -19,7 +19,7 @@ public class WhackAMole : MonoBehaviour
 
     void Start()
     {
-		float offset = - dimension/2f + 0.2f;
+		float offset = - dimension/1.5f + 0.0f;
         // instantiate all of the moles
         for (int i = 0; i < dimension; i++)
         {
@@ -59,6 +59,6 @@ public class WhackAMole : MonoBehaviour
     {
 		Debug.Log("Gameover");
 		gameTimer = gameLength;
-		// GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FinishGame(curScore);
+		GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FinishGame(curScore);
     }
 }

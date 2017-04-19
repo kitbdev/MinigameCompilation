@@ -18,7 +18,8 @@ public class Mole : MonoBehaviour {
 	private float curTimer = 0;
 	public float hitDur = 2;
 	public float upDur = 3;
-	public float downDur = 4;
+	public float downDur = 7;
+	public float downDurRan = 2;
 
 	void Start() {
 		anim = GetComponent<Animator>();
@@ -30,13 +31,13 @@ public class Mole : MonoBehaviour {
 			// move to next state
 			if (moleState==MoleState.up) {
 				moleState = MoleState.down;
-				curTimer = downDur;
+				curTimer = downDur+Random.Range(-1f,1f)*downDurRan;
 			} else if (moleState==MoleState.down) {
 				moleState = MoleState.up;
 				curTimer = upDur;
 			} else if (moleState==MoleState.hit) {
 				moleState = MoleState.down;
-				curTimer = downDur;
+				curTimer = downDur+Random.Range(-1f,1f)*downDurRan;
 			}
 			anim.SetInteger("MoleState", (int)moleState);
 		} else {
