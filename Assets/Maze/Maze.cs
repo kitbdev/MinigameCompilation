@@ -62,7 +62,7 @@ public class Maze : MonoBehaviour
 					finished = true;
                     started = false;
                     int curScore = (int)(1f / timeTaken * 100);
-                    GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FinishGame(curScore);
+		            GameObject.FindGameObjectWithTag("MinigameManager").GetComponent<MinigameManager>().FinishMinigame(curScore);
 				}
 			}
         } else {
